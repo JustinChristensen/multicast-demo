@@ -12,7 +12,8 @@ int main(int argc, char const *argv[])
     int reuse = 1;
 
     if (fd >= 0) {
-        if (setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse)) >= 0) {
+        if (setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse)) >= 0 &&
+            setsockopt(fd, SOL_SOCKET, SO_REUSEPORT, &reuse, sizeof(reuse)) >= 0) {
             struct sockaddr_in addr = {
                 .sin_family = AF_INET,
                 .sin_addr.s_addr = htonl(INADDR_ANY),
